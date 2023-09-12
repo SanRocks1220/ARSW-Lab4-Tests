@@ -10,10 +10,11 @@ import edu.eci.arsw.blueprints.model.Point;
 import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
 import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
 import edu.eci.arsw.blueprints.persistence.impl.InMemoryBlueprintPersistence;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.junit.Test;
 import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -67,6 +68,61 @@ public class InMemoryPersistenceTest {
         }
                 
         
+    }
+
+    @Test
+    public void getAllBlueprintsByAuthor() {
+        InMemoryBlueprintPersistence ibpp=new InMemoryBlueprintPersistence();
+        
+        Point[] pts=new Point[]{new Point(0, 0),new Point(10, 10)};
+        Blueprint bp=new Blueprint("maria", "thepaint",pts);
+        
+        try {
+            ibpp.saveBlueprint(bp);
+        } catch (BlueprintPersistenceException ex) {
+            fail("Blueprint persistence failed inserting the first blueprint.");
+        }
+
+        Point[] pts2=new Point[]{new Point(10, 10),new Point(20, 20)};
+        Blueprint bp2=new Blueprint("maria", "theCry",pts2);
+
+        try{
+            ibpp.saveBlueprint(bp2);
+        }
+        catch (BlueprintPersistenceException ex){
+            fail("Blueprint persistence failed inserting the second blueprint.");
+        }
+
+        List<Blueprint> blueprintList = new ArrayList<Blueprint>();
+        blueprintList.add(bp2);
+        blueprintList.add(bp);
+        
+        try {
+            assertEquals(ibpp.getBlueprintsByAuthor("maria"), blueprintList);
+        } catch (BlueprintNotFoundException e) {
+            fail("Blueprint persistence failed querying the blueprints of the current author.");
+        }
+
+    }
+
+    @Test
+    public void getBlueprintByAuthorAndName() {
+        InMemoryBlueprintPersistence ibpp=new InMemoryBlueprintPersistence();
+        
+        Point[] pts=new Point[]{new Point(0, 0),new Point(10, 10)};
+        Blueprint bp=new Blueprint("maria", "thepaint",pts);
+        
+        try {
+            ibpp.saveBlueprint(bp);
+        } catch (BlueprintPersistenceException ex) {
+            fail("Blueprint persistence failed inserting the first blueprint.");
+        }
+
+        try {
+            assertEquals(ibpp.getBlueprint("maria", "thepaint"), bp);
+        } catch (BlueprintNotFoundException e) {
+            fail("Blueprint persistence failed querying the blueprint of the current author and given name of blueprint.");
+        }
     }
 
 
