@@ -5,12 +5,16 @@
  */
 package edu.eci.arsw.blueprints.persistence;
 
+import org.springframework.stereotype.Service;
+
 import edu.eci.arsw.blueprints.model.Blueprint;
 
 /**
  *
  * @author hcadavid
  */
+
+@Service
 public interface BlueprintsPersistence {
     
     /**
