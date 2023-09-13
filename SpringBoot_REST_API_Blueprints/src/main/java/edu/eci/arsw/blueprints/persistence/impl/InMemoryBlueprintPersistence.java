@@ -12,7 +12,9 @@ import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
 import edu.eci.arsw.blueprints.persistence.BlueprintsPersistence;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -32,8 +34,7 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
         //load stub data
         Point[] pts=new Point[]{new Point(140, 140),new Point(115, 115)};
         Blueprint bp=new Blueprint("_authorname_", "_bpname_ ",pts);
-        blueprints.put(new Tuple<>(bp.getAuthor(),bp.getName()), bp);
-        
+        blueprints.put(new Tuple<>(bp.getAuthor(),bp.getName()), bp);     
     }    
     
     @Override
@@ -69,6 +70,12 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
         return bluePrints;
     }
 
-    
+
+    @Override
+    public Set<Blueprint> getAllBlueprints() throws BlueprintNotFoundException {
+        Collection<Blueprint> bluePrintsCollection = this.blueprints.values();
+        Set<Blueprint> bluePrints = new HashSet<>(bluePrintsCollection);
+        return bluePrints;
+    }
     
 }
