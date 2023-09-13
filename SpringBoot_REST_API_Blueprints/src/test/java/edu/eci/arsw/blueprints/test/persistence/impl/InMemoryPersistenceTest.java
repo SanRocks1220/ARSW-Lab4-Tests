@@ -15,6 +15,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -125,6 +126,32 @@ public class InMemoryPersistenceTest {
         }
     }
 
+    @Test
+    public void ShouldReturnAllBlueprints() {
+        InMemoryBlueprintPersistence ibpp=new InMemoryBlueprintPersistence();
+        
+        Point[] pts=new Point[]{new Point(0, 0),new Point(10, 10)};
+        Blueprint bp=new Blueprint("maria", "thepaint",pts);
 
+        Point[] pts0=new Point[]{new Point(40, 40)};
+        Blueprint bp0=new Blueprint("mario", "mypaint",pts0);
+
+        int numberOfBluePrints = 2;
+        numberOfBluePrints++;       //InMemoryBluPrint add by default a blueprint
+
+        try {
+            ibpp.saveBlueprint(bp);
+            ibpp.saveBlueprint(bp0);
+        } catch (BlueprintPersistenceException ex) {
+            fail("Blueprint persistence failed inserting the first blueprint.");
+        }
+
+        try {
+            assertEquals(ibpp.getAllBlueprints().size(), numberOfBluePrints);
+        } catch (BlueprintNotFoundException e) {
+            fail("There isn't Blueprints");
+        }
+
+    }
     
 }

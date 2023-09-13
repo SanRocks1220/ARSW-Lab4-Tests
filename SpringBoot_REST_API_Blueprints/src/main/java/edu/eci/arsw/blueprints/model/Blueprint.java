@@ -87,5 +87,7 @@ public class Blueprint {
     }
     
     
-    
+    public void setPoints(Point[] toAdd){
+        this.points=Arrays.asList(toAdd);
+    }
 }
