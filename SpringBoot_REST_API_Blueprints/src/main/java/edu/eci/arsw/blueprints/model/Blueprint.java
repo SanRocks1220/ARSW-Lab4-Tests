@@ -20,7 +20,7 @@ public class Blueprint {
         this.name=name;
         points=Arrays.asList(pnts);
     }
-         
+
     public Blueprint(String author, String name){
         this.name=name;
         points=new ArrayList<>();
@@ -87,5 +87,7 @@ public class Blueprint {
     }
     
     
-    
+    public void setPoints(Point[] toAdd){
+        this.points=Arrays.asList(toAdd);
+    }
 }
