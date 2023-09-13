@@ -25,7 +25,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Component
 public class BlueprintsServices {
-   
+
     @Autowired
     BlueprintsPersistence bpp;
     
@@ -34,7 +34,12 @@ public class BlueprintsServices {
     }
     
     public Set<Blueprint> getAllBlueprints(){
-        return null;
+        try {
+            return bpp.getAllBlueprints();
+        } catch (BlueprintNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
     
     /**

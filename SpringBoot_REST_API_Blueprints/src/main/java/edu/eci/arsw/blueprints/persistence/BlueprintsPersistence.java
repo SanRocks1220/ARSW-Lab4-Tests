@@ -6,6 +6,7 @@
 package edu.eci.arsw.blueprints.persistence;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
@@ -39,10 +40,16 @@ public interface BlueprintsPersistence {
     /**
      * 
      * @param author blueprint's author
-     * @param bprintname blueprint's author
      * @return the blueprint of the given name and author
      * @throws BlueprintNotFoundException if there is no such blueprint
      */
     public List<Blueprint> getBlueprintsByAuthor(String author) throws BlueprintNotFoundException;
     
+
+    /**
+     * 
+     * @return all the blueprints 
+     * @throws BlueprintNotFoundException if there is no such blueprint
+     */
+    public Set<Blueprint> getAllBlueprints() throws BlueprintNotFoundException;
 }

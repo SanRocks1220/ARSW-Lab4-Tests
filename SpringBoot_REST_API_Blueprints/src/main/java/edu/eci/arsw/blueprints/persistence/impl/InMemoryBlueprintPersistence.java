@@ -12,7 +12,9 @@ import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
 import edu.eci.arsw.blueprints.persistence.BlueprintsPersistence;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -68,6 +70,12 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
         return bluePrints;
     }
 
-    
+
+    @Override
+    public Set<Blueprint> getAllBlueprints() throws BlueprintNotFoundException {
+        Collection<Blueprint> bluePrintsCollection = this.blueprints.values();
+        Set<Blueprint> bluePrints = new HashSet<>(bluePrintsCollection);
+        return bluePrints;
+    }
     
 }
