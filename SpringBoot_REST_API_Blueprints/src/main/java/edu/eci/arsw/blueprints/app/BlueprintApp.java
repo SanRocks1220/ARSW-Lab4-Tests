@@ -29,6 +29,7 @@ public class BlueprintApp {
         try {
             bps.addNewBlueprint(bp);
             System.out.println(bps.getBlueprint("mack", "mypaint"));
+            System.out.println(bps.getBlueprintsByAuthor("mack"));
         } catch (BlueprintPersistenceException e) {
             e.printStackTrace();
         } catch (BlueprintNotFoundException e){
